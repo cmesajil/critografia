@@ -20,6 +20,8 @@ public class MainAESGCMCipher {
         byte[] iv=Utils.generateIV=(length:AES_GCM_IV_LENGTH);
         byte[] aad="Header".getBytes();
         
+        String encrupted = aes_gcm.encrypt();
+        
         String msg="This is a message";
         String enctypted =aes_gcm.encrypt(plainText:msg,iv,aad);
         String enctypted =aes_gcm.encrypt(encrypteText:encrypted,aad);

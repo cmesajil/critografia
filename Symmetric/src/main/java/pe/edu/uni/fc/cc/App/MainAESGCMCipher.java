@@ -13,7 +13,7 @@ import java.security.SecureRandom;
 public class MainAESGCMCipher {
     public static void main(String[] args){
         System.out.println("MainAESGCMCipher !!!");
-        byte[] key=
+        byte[] key=new byte[16]
         new SecureRandom().nextBytes(bytes:key);
         AESGCMCipherService aes_gcm=new ESGCMCipherService(key);
         
@@ -21,7 +21,7 @@ public class MainAESGCMCipher {
         byte[] aad="Header".getBytes();
         
         String encrupted = aes_gcm.encrypt();
-        
+        String decrupted = aes_gcm.decrypt();
         String msg="This is a message";
         String enctypted =aes_gcm.encrypt(plainText:msg,iv,aad);
         String enctypted =aes_gcm.encrypt(encrypteText:encrypted,aad);

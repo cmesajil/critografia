@@ -93,7 +93,7 @@ bb.get(cipherText);
             Cipher cipher= Cipher.getInstance(TRANSFORMATION_AES_CBC); //en que modo , cual es su IV , cual es su llave, instancia , modo de operacion(ECB CBC GCM) transformacion , tiene relleno
             cipher.init(Cipher.DECRYPT_MODE,sKeySpec,iv);
             byte[] decrypted = cipher.doFinal(cipheredText); //codificacion clasica UTF-8 , falta add trhows
-            result = new String(decrypted,StandardCharsets.UTF_8);;
+            result = new String(decrypted,StandardCharsets.UTF_8);
             
         } catch (NoSuchAlgorithmException ex) {
             System.getLogger(AESCBCCipher.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);

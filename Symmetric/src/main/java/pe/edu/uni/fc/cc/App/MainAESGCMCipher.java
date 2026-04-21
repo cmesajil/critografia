@@ -5,6 +5,9 @@
 package pe.edu.uni.fc.cc.App;
 
 import java.security.SecureRandom;
+import static pe.edu.uni.fc.cc.common.Constans.AES_GCM_IV_LENGTH;
+import pe.edu.uni.fc.cc.common.Utils;
+import pe.edu.uni.fc.cc.service.AESGCMCipherService;
 
 /**
  *
@@ -13,21 +16,21 @@ import java.security.SecureRandom;
 public class MainAESGCMCipher {
     public static void main(String[] args){
         System.out.println("MainAESGCMCipher !!!");
-        byte[] key=new byte[16]
-        new SecureRandom().nextBytes(bytes:key);
-        AESGCMCipherService aes_gcm=new ESGCMCipherService(key);
+        String msg="This is a message";
+        byte[] key=new byte[16];
+        SecureRandom r=new SecureRandom();
+        r.nextBytes(key);
+        AESGCMCipherService aes_gcm=new AESGCMCipherService(key);
         
-        byte[] iv=Utils.generateIV=(length:AES_GCM_IV_LENGTH);
+        byte[] iv=Utils.generateIV(AES_GCM_IV_LENGTH);
         byte[] aad="Header".getBytes();
         
-        String encrupted = aes_gcm.encrypt();
-        String decrupted = aes_gcm.decrypt();
-        String msg="This is a message";
-        String enctypted =aes_gcm.encrypt(plainText:msg,iv,aad);
-        String enctypted =aes_gcm.encrypt(encrypteText:encrypted,aad);
-        System.out.println("original"+msg);
-        System.out.println("Encrypted"+encrypted);
-        System.out.println("Decrypt"+decrypted);
+        String encrypted = aes_gcm.encrypt(msg,iv,aad);
+        String decrypted = aes_gcm.decrypt(encrypted,aad);
+        
+        System.out.println("original "+msg);
+        System.out.println("Encrypted "+encrypted);
+        System.out.println("Decrypt "+decrypted);
                 
     }
 }

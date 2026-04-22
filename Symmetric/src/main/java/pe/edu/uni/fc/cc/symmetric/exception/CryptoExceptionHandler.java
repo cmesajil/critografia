@@ -22,6 +22,12 @@ public class CryptoExceptionHandler {
         if(e instanceof NoSuchAlgorithmException || e instanceof NoSuchPaddingException){
             return new CryptoConfigurationException("Error de configuracion criptografica",e);
         }
+        if(e instanceof InvalidKeyException  || e instanceof InvalidAlgorithmParameterException){
+            return new CryptoKeyException("Error en la llave o parametro",e);
+        }
+        if(e instanceof InvalidKeyException  || e instanceof InvalidAlgorithmParameterException){
+            return new CryptoOperationException("Error en la llave o parametro",e);
+        }
     return new CryptoException("Error  criptografica general",e);
     }
 }

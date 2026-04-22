@@ -86,21 +86,12 @@ bb.get(cipherText);
             byte[] decrypted = cipher.doFinal(cipheredText); //codificacion clasica UTF-8 , falta add trhows
             result = new String(decrypted,StandardCharsets.UTF_8);
             
-        } catch (NoSuchAlgorithmException ex) {
-            System.getLogger(AESCBCCipher.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        } catch (NoSuchPaddingException ex) {
-            System.getLogger(AESCBCCipher.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        } catch (InvalidKeyException ex) {
-            System.getLogger(AESCBCCipher.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        } catch (InvalidAlgorithmParameterException ex) {
-            System.getLogger(AESCBCCipher.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        } catch (IllegalBlockSizeException ex) {
-            System.getLogger(AESCBCCipher.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        } catch (BadPaddingException ex) {
-            System.getLogger(AESCBCCipher.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | InvalidAlgorithmParameterException | IllegalBlockSizeException | BadPaddingException ex) {
+            throw CryptoExceptionHandler.handle(ex);
         }
         
         return result;
+       
     }
     
     

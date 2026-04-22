@@ -18,6 +18,7 @@ import javax.crypto.spec.SecretKeySpec;
 import static pe.edu.uni.fc.cc.common.Constans.AES_CBC_IV_LENGTH;
 import static pe.edu.uni.fc.cc.common.Constans.TRANSFORMATION_AES_CBC;
 import pe.edu.uni.fc.cc.symmetric.AESCBCCipher;
+import pe.edu.uni.fc.cc.symmetric.exception.CryptoExceptionHandler;
 
 /**
  *
@@ -48,18 +49,8 @@ public class AESCBCCipherService {
             System.arraycopy(encrypted, 0,combined, initVector.length, encrypted.length);
             result =Base64.getEncoder().encodeToString(combined);
             
-        } catch (NoSuchAlgorithmException ex) {
-            System.getLogger(AESCBCCipher.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        } catch (NoSuchPaddingException ex) {
-            System.getLogger(AESCBCCipher.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        } catch (InvalidKeyException ex) {
-            System.getLogger(AESCBCCipher.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        } catch (InvalidAlgorithmParameterException ex) {
-            System.getLogger(AESCBCCipher.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        } catch (IllegalBlockSizeException ex) {
-            System.getLogger(AESCBCCipher.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        } catch (BadPaddingException ex) {
-            System.getLogger(AESCBCCipher.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | InvalidAlgorithmParameterException | IllegalBlockSizeException | BadPaddingException ex) {
+            throw CryptoExceptionHandler.handle(ex);
         }
         
         return result;

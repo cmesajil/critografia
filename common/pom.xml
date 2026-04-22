@@ -10,7 +10,7 @@
     <artifactId>common</artifactId>
     <packaging>jar</packaging>
     <properties>
-        <maven.compiler.release>25</maven.compiler.release>
+        <maven.compiler.release>21</maven.compiler.release>
         <exec.mainClass>pe.edu.uni.fc.cc.common.mavenproject1.Mavenproject1</exec.mainClass>
     </properties>
     <name>common</name>

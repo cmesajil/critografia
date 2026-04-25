@@ -4,8 +4,12 @@
  */
 package pe.edu.uni.fc.cc.common;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.HexFormat;
+import javax.crypto.SecretKey;
+import static pe.edu.uni.fc.cc.common.Constans.SHA_256_ALGORITHM;
 
 
 /**
@@ -22,5 +26,18 @@ public class Utils {
         SecureRandom sr=new SecureRandom();
         sr.nextBytes(initVector);
         return initVector;
+    }
+    
+    public static String getKeyHash(SecretKey sk){
+         byte[] hash=null;
+        try {
+            byte[] keyBytes =sk.getEncoded();
+            MessageDigest md=MessageDigest.getInstance(SHA_256_ALGORITHM);
+            hash=md.digest(keyBytes);
+      
+        } catch (NoSuchAlgorithmException ex) {
+            System.getLogger(Utils.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        return byteToHex(hash);
     }
 }

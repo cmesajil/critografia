@@ -11,6 +11,7 @@
         <module>Symmetric</module>
         <module>Hashing</module>
         <module>Container</module>
+        <module>rsa</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -28,6 +28,9 @@ public class Constans {
     public static final String CONTAINER_FILENAME="/home/mcg/contenedor.p12"; //volatil
     public static final String CONTAINER_PASSWORD="container-password";
     
+    
+    public static final String RSA_ALGORITHM="RSA";
+    public static final int RSA_KEY_SIZE_2048=2048;
     //llave
     //se necesita AES
     public static final String AES_ALIAS="aes_key"; //ID de llave

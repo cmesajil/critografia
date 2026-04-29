@@ -6,7 +6,7 @@
         <artifactId>2026-I-CC0F7</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>rsa</artifactId>
+    <artifactId>Asymmetric</artifactId>
     <packaging>jar</packaging>
     <properties>
         <exec.mainClass>pe.edu.uni.fc.cc.rsa.RSACipher</exec.mainClass>
@@ -24,4 +24,5 @@
         <scope>test</scope>
         </dependency>
     </dependencies>
+    <name>Asymmetric</name>
 </project>

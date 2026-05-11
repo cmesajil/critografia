@@ -31,8 +31,8 @@ public class AESGCMCipherService {
         public AESGCMCipherService(byte[] key){
             this.key=key;
         }
-        public String encrypt(String plainText,byte[] iv, byte[] aad){
-            String result="";
+        public byte[] encrypt(byte[] plainText,byte[] iv, byte[] aad){
+            byte[] result=null;
             try {
                 Cipher cipher=Cipher.getInstance(TRANSFORMATION_AES_GCM);
                 SecretKeySpec keySpec=new SecretKeySpec(key,AES_ALGORITHM);
@@ -42,12 +42,12 @@ public class AESGCMCipherService {
                     cipher.updateAAD(aad);
                 }
                 
-                byte[] encrypted = cipher.doFinal(plainText.getBytes(StandardCharsets.UTF_8));
+                byte[] encrypted = cipher.doFinal(plainText);
                 //concatenar el iv
                 byte[] ciphered = new byte[iv.length+encrypted.length];
                 System.arraycopy(iv,0,ciphered,0,iv.length);
                 System.arraycopy(encrypted,0,ciphered,iv.length,encrypted.length);
-                result =Base64.getEncoder().encodeToString(ciphered);
+                result =ciphered;
                 
             } catch (NoSuchAlgorithmException ex) {
                 System.getLogger(AESGCMCipherService.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
@@ -66,11 +66,17 @@ public class AESGCMCipherService {
             return result;
         
         }
-        public String decrypt(String encryptedText, byte[] aad){
-            String result="";
+        
+        public String encrypt(String plaintext,byte[] iv,byte[] aad){
+            byte[] ciphered=encrypt(plaintext.getBytes(StandardCharsets.UTF_8),iv,aad);
+            return Base64.getEncoder().encodeToString(ciphered);
+        }
+        
+        public byte[] decrypt(byte[] encryptedText, byte[] aad){
+            byte[] result=null;
             try {
                 
-                byte[] input =Base64.getDecoder().decode(encryptedText);
+                byte[] input =encryptedText;
                 byte[] iv =new byte[AES_GCM_IV_LENGTH];
                 byte[] cipherText=new byte[input.length-iv.length];
                 System.arraycopy(input,0,iv,0,iv.length);
@@ -86,7 +92,7 @@ public class AESGCMCipherService {
                 }
                 byte[] decrypted = cipher.doFinal(cipherText);
                 //result =Base64.getEncoder().encodeToString(decrypted);
-                result = new String(decrypted, StandardCharsets.UTF_8);
+                result = decrypted;
                 return result;
             } catch (NoSuchAlgorithmException ex) {
                 System.getLogger(AESGCMCipherService.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
@@ -103,6 +109,11 @@ public class AESGCMCipherService {
             }
         
         return result;
+        }
+        
+        public String decrypt(String encryptedText,byte[] aad){
+            byte[] decrypted=decrypt(Base64.getDecoder().decode(encryptedText),aad);
+            return new String(decrypted,StandardCharsets.UTF_8);
         }
     
 }

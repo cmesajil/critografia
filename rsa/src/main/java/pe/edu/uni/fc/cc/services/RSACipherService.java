@@ -32,14 +32,15 @@ public class RSACipherService {
                
     }
     
-    public String encrypt(String plainText){
-        String result="";
+    public byte[] encrypt(byte[] byteText){
+        if(publicKey==null) return null;
+        byte[] result=null;
         Cipher cipher;
         try {
             cipher = Cipher.getInstance(RSA_ALGORITHM);
             cipher.init(Cipher.ENCRYPT_MODE,this.publicKey);
-            byte[] encryptedText=cipher.doFinal(plainText.getBytes());
-            result=Base64.getEncoder().encodeToString(encryptedText);
+            byte[] encryptedText=cipher.doFinal(byteText);
+            result=encryptedText;
         
         } catch (NoSuchAlgorithmException ex) {
             System.getLogger(RSACipher.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
@@ -56,15 +57,21 @@ public class RSACipherService {
         return result;
     }
     
-    public String decrypt(String encryptedText){
-         String result="";
+    public String encrypt(String plainText){
+        byte[] encryptedText=encrypt(plainText.getBytes());
+        return Base64.getEncoder().encodeToString(encryptedText);
+    }
+    
+    public byte[] decrypt(byte[] encryptedText){
+        if(publicKey==null) return null;
+        byte[] result=null;
         try {
             
             Cipher cipher=Cipher.getInstance(RSA_ALGORITHM);
             cipher.init(Cipher.DECRYPT_MODE,this.privateKey);
-            byte[] decodeEncryptedText=Base64.getDecoder().decode(encryptedText);
+            byte[] decodeEncryptedText=encryptedText;
             byte[] decryptedText=cipher.doFinal(decodeEncryptedText);
-            result=new String(decryptedText);
+            result=decryptedText;
         } catch (NoSuchAlgorithmException ex) {
             System.getLogger(RSACipher.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         } catch (NoSuchPaddingException ex) {
@@ -78,5 +85,10 @@ public class RSACipherService {
         }
          return result;   
      }
+    
+    public String decrypt(String encryptedText){
+        byte[] decryptedText=decrypt(Base64.getDecoder().decode(encryptedText));
+        return new String(decryptedText);
+    }
 }
 

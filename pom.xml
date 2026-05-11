@@ -12,6 +12,7 @@
         <module>Hashing</module>
         <module>Container</module>
         <module>rsa</module>
+        <module>DigitalEnvelope</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -16,7 +16,7 @@ public class Constans {
     public static final String PBKDF2_WITH_HMAC_SHA_256_ALGORITHM="PBKDF2WithHmacSHA256";
     public static final String TRANSFORMATION_AES_CBC="AES/CBC/PKCS5Padding";
     public static final String TRANSFORMATION_AES_GCM="AES/GCM/NoPadding";
-    public static final byte[] AES_GCM_AAD="2016-uni".getBytes();
+    public static final byte[] AES_GCM_AAD="2016-I-CC0F7".getBytes();
    
     public static final int AES_CBC_IV_LENGTH=16;
     public static final int AES_GCM_IV_LENGTH=12;

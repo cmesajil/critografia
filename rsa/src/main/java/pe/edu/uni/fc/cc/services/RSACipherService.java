@@ -32,6 +32,20 @@ public class RSACipherService {
                
     }
     
+    public RSACipherService(PublicKey pubkey){
+        
+        this.publicKey=pubkey;
+        this.privateKey=null;
+               
+    }
+    
+    public RSACipherService(PrivateKey privkey){
+        
+        this.publicKey=null;
+        this.privateKey=privkey;
+               
+    }
+    
     public byte[] encrypt(byte[] byteText){
         if(publicKey==null) return null;
         byte[] result=null;
@@ -63,7 +77,7 @@ public class RSACipherService {
     }
     
     public byte[] decrypt(byte[] encryptedText){
-        if(publicKey==null) return null;
+        if(privateKey==null) return null;
         byte[] result=null;
         try {
             

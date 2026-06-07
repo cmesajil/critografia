@@ -28,7 +28,12 @@ public class Constans {
     public static final String BCFIPS_PROVIDER="BCFIPS";
     //files names
     public static final String USER_NAME=System.getProperty("user.home");
-    public static final String USER_CD_FILENAME=Paths.get(USER_NAME,"user cd.crt").toString();
+    public static final String USER_CD_FILENAME=Paths.get(USER_NAME,"user_cd.crt").toString();
+    public static final String ROOT_CD_FILENAME=Paths.get(USER_NAME,"ca_root.crt").toString();
+    public static final String ROOT_CONTAINER_FILENAME=Paths.get(USER_NAME,"container_root.p12").toString();
+    public static final String ROOT_CONTAINER_ALIAS="root_container";
+    public static final String USER_CONTAINER_FILENAME=Paths.get(USER_NAME,"container_user.p12").toString();
+    public static final String USER_CONTAINER_ALIAS="user_container";
     // container
     public static final String PKCS12_KEYSTORE_TYPE="PKCS12"; //JKS otra opcion , es modificable
     public static final String CONTAINER_FILENAME="/home/mcg/contenedor.p12"; //volatil

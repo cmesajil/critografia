@@ -14,6 +14,7 @@
         <module>rsa</module>
         <module>DigitalEnvelope</module>
         <module>KPI</module>
+        <module>DigitalSignature</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

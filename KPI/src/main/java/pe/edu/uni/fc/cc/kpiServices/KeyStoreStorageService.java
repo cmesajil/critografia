@@ -29,7 +29,6 @@ public class KeyStoreStorageService {
             ks = KeyStore.getInstance(PKCS12_KEYSTORE_TYPE,BCFIPS_PROVIDER);
             ks.load(null,null);
             X509Certificate[] chain=new X509Certificate[]{certificate};
-            ks.setCertificateEntry("alias certificate", certificate);
             ks.setKeyEntry(alias, privatekey, password.toCharArray(), chain);
             try(FileOutputStream fos=new FileOutputStream(filePath)){
                 ks.store(fos,password.toCharArray());
@@ -48,6 +47,31 @@ public class KeyStoreStorageService {
         }
 
     }  
+    
+    public void saveTrustPKCS12File(String filePath,String password,String alias,X509Certificate certificate){
+        try {
+            KeyStore ks=KeyStore.getInstance(PKCS12_KEYSTORE_TYPE);
+            ks.load(null,null);
+            ks.setCertificateEntry(alias, certificate);
+            
+            try (FileOutputStream fos=new FileOutputStream(filePath)){
+                ks.store(fos,password.toCharArray());
+                System.out.println("Truststore generado");
+                System.out.println("Entradas: " + ks.size());
+            };
+            
+            
+        } catch (KeyStoreException ex) {
+            System.getLogger(KeyStoreStorageService.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (IOException ex) {
+            System.getLogger(KeyStoreStorageService.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            System.getLogger(KeyStoreStorageService.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        } catch (CertificateException ex) {
+            System.getLogger(KeyStoreStorageService.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    
+    }
     
     public Credential loadKeyMaterialFromPKCS12File(String filePath,String password,String alias){
         Credential credential=null;

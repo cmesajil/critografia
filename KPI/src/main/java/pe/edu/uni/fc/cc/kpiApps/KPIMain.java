@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package pe.edu.juni.fc.cc.kpiApps;
+package pe.edu.uni.fc.cc.kpiApps;
 
 import java.security.KeyPair;
 import java.security.NoSuchProviderException;

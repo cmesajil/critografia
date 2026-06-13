@@ -26,6 +26,9 @@ public class Constans {
     public static final int TAG_LENGTH=128; //bits
     public static final String RSA_SIGN_ALGORITHM = "SHA256withRSA";
     public static final String BCFIPS_PROVIDER="BCFIPS";
+    public static final String TLS_CONTEXT="TLSv1.3";
+    
+    
     //files names
     public static final String USER_NAME=System.getProperty("user.home");
     public static final String USER_CD_FILENAME=Paths.get(USER_NAME,"user_cd.crt").toString();
@@ -38,7 +41,7 @@ public class Constans {
     public static final String TRUST_ROOT_CONTAINER_FILENAME=Paths.get(USER_NAME,"trust_container_root.p12").toString();
     public static final String TRUST_ROOT_CONTAINER_ALIAS="trust_root_container";
     // container
-    public static final String PKCS12_KEYSTORE_TYPE="PKCS12"; //JKS otra opcion , es modificable
+        public static final String PKCS12_KEYSTORE_TYPE="PKCS12"; //JKS otra opcion , es modificable
     public static final String CONTAINER_FILENAME="/home/mcg/contenedor.p12"; //volatil
     public static final String CONTAINER_PASSWORD="container-password";
     

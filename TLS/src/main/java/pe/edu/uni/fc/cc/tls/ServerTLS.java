@@ -7,7 +7,9 @@ package pe.edu.uni.fc.cc.tls;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import java.security.KeyManagementException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -30,6 +32,7 @@ import static pe.edu.uni.fc.cc.common.Constans.TLS_CONTEXT;
 public class ServerTLS {
 
     public static void main(String[] args) {
+        System.setOut(new PrintStream(System.out,true,StandardCharsets.UTF_8));
         System.out.println("Transport Layer Security!");
         int port=8888;
         String PKC12Path=ROOT_CONTAINER_FILENAME;
@@ -53,10 +56,12 @@ public class ServerTLS {
                 SSLServerSocketFactory ssf=sslContext.getServerSocketFactory();
                 SSLServerSocket serverSocket=(SSLServerSocket) ssf.createServerSocket(port);
                 
+                serverSocket.setEnabledProtocols(new String[]{TLS_CONTEXT});
                 System.out.println(
                 "Servidor TLS de mensajería corriendo de forma segura en el puerto " +
                     port
                 );
+                //ClientHandler[] clientes;
                 while(true){
                     // Espera a que un cliente se conecte por TLS
                     Socket clientSocket = serverSocket.accept();
